@@ -45,11 +45,17 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-    .then(prouctData => res.json(prouctData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    })
+  .then((productData) => {
+    if (!productData) {
+      res.status(404).json({ error: 'Product not found' })
+      return;
+    }
+    res.json(productData);
+  })
+  .catch((err) => {
+    // console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 // create new product
@@ -121,7 +127,7 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });

@@ -5,6 +5,7 @@ https://github.com/mtnbiker72/ecommerce-back-end
 
 The video that explains how to use the application -
 
+https://drive.google.com/file/d/14moTf9n8LHqX7Yn46jTyRHRMII2WUxZB/view
 
 ## Required Modules:
 * mysql2

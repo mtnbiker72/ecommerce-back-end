@@ -35,15 +35,22 @@ router.get('/:id', (req, res) => {
       attributes: ['id', 'product_name', 'price', 'category_id']
     },
   })
-    .then(categoryData => res.json(categoryData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    })
+
+  .then((categoryData) => {
+    if (!categoryData) {
+      res.status(404).json({ error: 'Category not found' })
+      return;
+    }
+    res.json(categoryData);
+  })
+  .catch((err) => {
+    // console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
-  // create a new categoryo
+  // create a new category
   Category.create({
     category_name: req.body.category_name
   })

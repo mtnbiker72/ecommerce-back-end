@@ -32,11 +32,17 @@ router.get('/:id', (req, res) => {
       model: Product,
     },
   })
-    .then(tagData => res.json(tagData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    })
+  .then((tagData) => {
+    if (!tagData) {
+      res.status(404).json({ message: 'Tag not found' })
+      return;
+    }
+    res.json(tagData);
+  })
+  .catch((err) => {
+    // console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
@@ -81,7 +87,7 @@ router.delete('/:id', (req, res) => {
   })
     .then(tagData => {
       if (!tagData) {
-        res.status(404).json({ message: 'Tag not found!' });
+        res.status(404).json({ error: 'Tag not found!' });
         return;
       }
       else {
